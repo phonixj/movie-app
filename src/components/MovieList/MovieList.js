@@ -11,27 +11,20 @@ export default class MovieList extends Component {
 
   state = {
     data: [],
-    genreList: [],
+    tagList: [],
   };
-
-  // constructor() {
-  //   super();
-  //   this.movies.getMovieList('return').then((movies) => {
-  //     this.setState({ data: movies });
-  //   });
-  // }
 
   componentDidMount() {
     this.movies.getMovieList('return').then((movies) => {
       this.setState({ data: movies });
     });
-    this.movies.getGenreList().then((genre) => {
-      this.setState({ genreList: genre });
+    this.movies.getTagList().then((tags) => {
+      this.setState({ tagList: tags });
     });
   }
 
   render() {
-    const { data, genreList } = this.state;
+    const { data, tagList } = this.state;
     return (
       <ul>
         <Space wrap>
@@ -43,8 +36,8 @@ export default class MovieList extends Component {
                 releaseDate={movie.release_date}
                 overview={movie.overview}
                 poster={movie.poster_path}
-                genreID={movie.genre_ids}
-                genreList={genreList}
+                tagID={movie.genre_ids}
+                tagList={tagList}
               />
             );
           })}

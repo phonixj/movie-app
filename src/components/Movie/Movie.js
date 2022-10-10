@@ -5,11 +5,11 @@ import './Movie.css';
 import { format } from 'date-fns';
 
 export default class Movie extends Component {
-  genreNames = () => {
+  tagNames = () => {
     const arr = [];
-    const { genreList, genreID } = this.props;
-    genreList.forEach(({ id, name }) => {
-      genreID.forEach((elem) => {
+    const { tagList, tagID } = this.props;
+    tagList.forEach(({ id, name }) => {
+      tagID.forEach((elem) => {
         if (id === elem) {
           arr.push(name);
         }
@@ -18,16 +18,9 @@ export default class Movie extends Component {
     return arr;
   };
 
-  // trimText = () => {
-  //   const { overview } = this.props;
-  //   const split = overview.split(' ');
-  //   const sliced = split.slice(0, 50);
-  //   return `${sliced.join(' ')} ...`;
-  // };
-
   render() {
     const { title, releaseDate, poster, overview } = this.props;
-    // const { Paragraph } = Typography;
+    const cutOverview = overview.slice(0, overview.lastIndexOf(' ', 170));
 
     return (
       <li className="item">
@@ -36,7 +29,7 @@ export default class Movie extends Component {
           style={{
             width: 454,
             display: 'flex',
-            height: 281,
+            minHeight: 281,
           }}
           cover={
             <img
@@ -48,22 +41,14 @@ export default class Movie extends Component {
         >
           <h1>{title}</h1>
           <div className="date">{format(new Date(releaseDate), 'MMMM dd, yyyy')}</div>
-          {this.genreNames().map((tag) => {
+          {this.tagNames().map((tag) => {
             return (
               <Tag style={{ opacity: 0.65 }} key={tag}>
                 {tag}
               </Tag>
             );
           })}
-          <p className="description">{`${overview.slice(0, overview.lastIndexOf(' ', 170))} ...`}</p>
-          {/* <Paragraph
-            className='description'
-            ellipsis={{
-              rows: 4,
-            }}
-          >
-            {overview}
-          </Paragraph> */}
+          <p className="description">{`${cutOverview} ...`}</p>
         </Card>
       </li>
     );
