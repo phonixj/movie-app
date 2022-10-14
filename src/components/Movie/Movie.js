@@ -4,6 +4,9 @@ import 'antd/dist/antd.min.css';
 import './Movie.css';
 import { format } from 'date-fns';
 
+import Rating from '../Rating';
+import Stars from '../Stars';
+
 export default class Movie extends Component {
   tagNames = () => {
     const arr = [];
@@ -19,27 +22,18 @@ export default class Movie extends Component {
   };
 
   render() {
-    const { title, releaseDate, poster, overview } = this.props;
-    const cutOverview = overview.slice(0, overview.lastIndexOf(' ', 170));
+    const { title, releaseDate, poster, overview, rating } = this.props;
+    const cutOverview = overview.slice(0, overview.lastIndexOf(' ', 130));
 
     return (
       <li className="item">
         <Card
           hoverable
-          style={{
-            width: 454,
-            display: 'flex',
-            minHeight: 281,
-          }}
-          cover={
-            <img
-              alt="movie poster"
-              src={`https://image.tmdb.org/t/p/original${poster}`}
-              style={{ height: 281, width: 183 }}
-            />
-          }
+          cover={<img alt="movie poster" src={`https://image.tmdb.org/t/p/original${poster}`} className="item__img" />}
         >
+          <Rating rating={rating} />
           <h1>{title}</h1>
+
           <div className="date">{format(new Date(releaseDate), 'MMMM dd, yyyy')}</div>
           {this.tagNames().map((tag) => {
             return (
@@ -49,6 +43,7 @@ export default class Movie extends Component {
             );
           })}
           <p className="description">{`${cutOverview} ...`}</p>
+          <Stars stars={rating} />
         </Card>
       </li>
     );

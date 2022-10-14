@@ -3,7 +3,14 @@
 .ant-card-body {
     padding: 0;
     margin-left: 20px;
-    /*width: 250px;*/
+    margin-top: 12px;
+}
+
+@media (max-width: 425px) {
+    .ant-card-body {
+        margin-top: 4px;
+        margin-left: 10px;
+    }
 }
 
 .ant-card-bordered .ant-card-cover {
@@ -15,17 +22,32 @@
 }
 
 .item {
-    margin-left: 32px;
-    margin-top: 19px;
+    flex: 1;
     font-family: 'Inter', sans-serif;
+}
+
+@media (max-width: 425px) {
+    .item {
+        flex: auto;
+    }
+}
+
+.ant-card {
+    max-width: 454px;
+    display: flex;
+    min-height: 281px;
+}
+
+@media (max-width: 425px) {
+    .ant-card {
+        display: block;
+        max-height: 281px;
+    }
 }
 
 h1 {
     margin: 0;
     font-size: 20px;
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
-    /*overflow: hidden;*/
 }
 
 .date {
@@ -35,8 +57,31 @@ h1 {
 
 .description {
     margin-top: 8px;
-    /*overflow: hidden;*/
     font-size: 12px;
     line-height: 22px;
-    width: 228px;
+    width: 90%;
+}
+
+@media (max-width: 425px) {
+    .description {
+        margin-top: 28px;
+    }
+}
+
+.item__img {
+    height: 100%;
+    width: 183px
+}
+
+@media (max-width: 425px) {
+    .item__img {
+        height: 91px;
+        width: 60px;
+        float: left;
+        margin: 10px;
+    }
+}
+
+.ant-alert-error {
+    margin: 12px 32px;
 }

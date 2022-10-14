@@ -1,0 +1,21 @@
+.rating{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    border: 2px solid #E9D100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 16px;
+    float: right;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 425px) {
+    .ant-rate{
+        position: relative;
+        left: 36%;
+    }
+}
