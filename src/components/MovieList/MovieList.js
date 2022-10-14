@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Spin, Alert } from 'antd';
+import { Spin, Alert, Pagination } from 'antd';
 
 import Movie from '../Movie';
 import './MovieList.css';
@@ -42,22 +42,25 @@ export default class MovieList extends Component {
         {loading ? (
           <Spin size="large" />
         ) : (
-          <ul className="movieList">
-            {data.map((movie) => {
-              return (
-                <Movie
-                  key={movie.id}
-                  title={movie.title}
-                  releaseDate={movie.release_date}
-                  overview={movie.overview}
-                  poster={movie.poster_path}
-                  tagID={movie.genre_ids}
-                  tagList={tagList}
-                  rating={movie.vote_average}
-                />
-              );
-            })}
-          </ul>
+          <>
+            <ul className="movieList">
+              {data.map((movie) => {
+                return (
+                  <Movie
+                    key={movie.id}
+                    title={movie.title}
+                    releaseDate={movie.release_date}
+                    overview={movie.overview}
+                    poster={movie.poster_path}
+                    tagID={movie.genre_ids}
+                    tagList={tagList}
+                    rating={movie.vote_average}
+                  />
+                );
+              })}
+            </ul>
+            <Pagination defaultCurrent={1} total={50} />
+          </>
         )}
       </div>
     );
