@@ -9,7 +9,18 @@ import MovieList from '../MovieList';
 import SearchLine from '../SearchLine';
 
 export default class App extends Component {
+  state = {
+    search: '',
+  };
+
+  updateSearch = (value) => {
+    this.setState({
+      search: value,
+    });
+  };
+
   render() {
+    const { search } = this.state;
     return (
       <>
         <Online>
@@ -22,8 +33,8 @@ export default class App extends Component {
                 key: 1,
                 children: (
                   <>
-                    <SearchLine />
-                    <MovieList />
+                    <SearchLine updateSearch={this.updateSearch} />
+                    <MovieList search={search} />
                   </>
                 ),
               },

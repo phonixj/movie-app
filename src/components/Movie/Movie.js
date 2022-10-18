@@ -7,6 +7,8 @@ import { format } from 'date-fns';
 import Rating from '../Rating';
 import Stars from '../Stars';
 
+import noImage from './no-image-icon.png';
+
 export default class Movie extends Component {
   tagNames = () => {
     const arr = [];
@@ -24,17 +26,17 @@ export default class Movie extends Component {
   render() {
     const { title, releaseDate, poster, overview, rating } = this.props;
     const cutOverview = overview.slice(0, overview.lastIndexOf(' ', 130));
-
+    let date = null;
+    if (releaseDate) {
+      date = format(new Date(releaseDate), 'MMMM dd, yyyy');
+    }
+    const imagePoster = poster ? `https://image.tmdb.org/t/p/original${poster}` : noImage;
     return (
       <li className="item">
-        <Card
-          hoverable
-          cover={<img alt="movie poster" src={`https://image.tmdb.org/t/p/original${poster}`} className="item__img" />}
-        >
+        <Card hoverable cover={<img alt="movie poster" src={imagePoster} className="item__img" />}>
           <Rating rating={rating} />
           <h1>{title}</h1>
-
-          <div className="date">{format(new Date(releaseDate), 'MMMM dd, yyyy')}</div>
+          <div className="date">{date}</div>
           {this.tagNames().map((tag) => {
             return (
               <Tag style={{ opacity: 0.65 }} key={tag}>

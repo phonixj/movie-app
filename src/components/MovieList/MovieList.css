@@ -4,7 +4,7 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 30px;
 }
 
 @media (max-width: 425px) {
@@ -31,4 +31,8 @@
     .ant-pagination {
         margin-top: 18px;
     }
+}
+
+.ant-alert-info {
+    margin: 12px 32px;
 }
