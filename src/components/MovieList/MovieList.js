@@ -74,7 +74,7 @@ export default class MovieList extends Component {
     ) : null;
     const emptySearch = emptySearchLine && !error ? <Alert message="Введите название фильма." type="info" /> : null;
     const noMatches =
-      data.length === 0 && !emptySearch ? (
+      data.length === 0 && !emptySearch && !error ? (
         <Alert message="Таких фильмов не найдено. Проверьте название." type="info" />
       ) : null;
     return (
