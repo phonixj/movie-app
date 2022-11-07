@@ -6,14 +6,15 @@ import { format } from 'date-fns';
 
 import Rating from '../Rating';
 import Stars from '../Stars';
+import { TagsApiConsumer } from '../MovieApiContext';
 
 import noImage from './no-image-icon.png';
 
 export default class Movie extends Component {
-  tagNames = () => {
+  tagNames = (tags) => {
     const arr = [];
-    const { tagList, tagID } = this.props;
-    tagList.forEach(({ id, name }) => {
+    const { tagID } = this.props;
+    tags.forEach(({ id, name }) => {
       tagID.forEach((elem) => {
         if (id === elem) {
           arr.push(name);
@@ -24,7 +25,7 @@ export default class Movie extends Component {
   };
 
   render() {
-    const { title, releaseDate, poster, overview, rating } = this.props;
+    const { title, releaseDate, poster, overview, rating, idSession, id, rateMovie, star } = this.props;
     const cutOverview = overview.slice(0, overview.lastIndexOf(' ', 130));
     let date = null;
     if (releaseDate) {
@@ -37,15 +38,19 @@ export default class Movie extends Component {
           <Rating rating={rating} />
           <h1>{title}</h1>
           <div className="date">{date}</div>
-          {this.tagNames().map((tag) => {
-            return (
-              <Tag style={{ opacity: 0.65 }} key={tag}>
-                {tag}
-              </Tag>
-            );
-          })}
+          <TagsApiConsumer>
+            {(tags) => {
+              return this.tagNames(tags).map((tag) => {
+                return (
+                  <Tag style={{ opacity: 0.65 }} key={tag}>
+                    {tag}
+                  </Tag>
+                );
+              });
+            }}
+          </TagsApiConsumer>
           <p className="description">{`${cutOverview} ...`}</p>
-          <Stars stars={rating} />
+          <Stars idSession={idSession} id={id} rateMovie={rateMovie} star={star} />
         </Card>
       </li>
     );

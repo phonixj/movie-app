@@ -12,6 +12,21 @@
     margin-right: 10px;
     box-sizing: border-box;
 }
+.rating--low{
+    border-color: #E90000;
+}
+
+.rating--medium{
+    border-color: #E97E00;
+}
+
+.rating--high{
+    border-color: #E9D100;
+}
+
+.rating--top{
+    border-color: #66E900;
+}
 
 @media (max-width: 425px) {
     .ant-rate{
